@@ -2,9 +2,11 @@ from rest_framework import viewsets
 from .models import Movie, Rating
 from .serializers import MovieSerializer, RatingSerializer
 
-class MoviewViewSet(viewsets.ModelViewSet):
+
+class MovieViewSet(viewsets.ModelViewSet):
     queryset = Movie.objects.all()
     serializer_class = MovieSerializer
+
 
 class RatingViewSet(viewsets.ModelViewSet):
     queryset = Rating.objects.all()
