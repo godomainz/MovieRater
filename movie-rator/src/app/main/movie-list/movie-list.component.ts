@@ -8,11 +8,17 @@ import { ApiService } from '../../api.service';
 })
 export class MovieListComponent implements OnInit {
 
-  movies = [];
+  movies:any = [];
   constructor(private apiService:ApiService) { }
 
   ngOnInit(): void {
-    this.movies = this.apiService.getMovies();
+    this.apiService.getMovies().subscribe(data => {
+      this.movies = data;
+      console.log(this.movies)
+    },
+    error=>{
+        console.log(error);
+    });
 
   }
 
