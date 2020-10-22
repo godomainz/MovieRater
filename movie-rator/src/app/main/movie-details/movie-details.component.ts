@@ -1,6 +1,7 @@
 import { Component, OnInit,Input,Output, EventEmitter } from '@angular/core';
 import { faStar } from '@fortawesome/free-solid-svg-icons';
 import { ApiService } from '../../api.service';
+import { Movie } from '../../auth/models/Movie';
 
 @Component({
   selector: 'app-movie-details',
@@ -9,8 +10,8 @@ import { ApiService } from '../../api.service';
 })
 export class MovieDetailsComponent implements OnInit {
 
-  @Input() movie = null;
-  @Output() updateMovie = new EventEmitter();
+  @Input() movie:Movie;
+  @Output() updateMovie = new EventEmitter<Movie>();
   faStar = faStar;
   rateHovered = 0 ;
 
@@ -19,11 +20,11 @@ export class MovieDetailsComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  rateHover(rate){
+  rateHover(rate: number){
     console.log(rate);
     this.rateHovered=rate;
   }
-  rateClicked(rate){
+  rateClicked(rate: number){
     this.apiService.rateMovie(rate,this.movie.id).subscribe(result=> this.getDetails(),
     error =>{
       console.log(error);
@@ -31,7 +32,7 @@ export class MovieDetailsComponent implements OnInit {
     )
   }
   getDetails(){
-    this.apiService.getMovie(this.movie.id).subscribe(movie=>this.updateMovie.emit(movie),
+    this.apiService.getMovie(this.movie.id).subscribe((movie:Movie)=>this.updateMovie.emit(movie),
     error =>{
       console.log(error);
     }

@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { Movie } from './auth/models/Movie';
 
 @Injectable({
   providedIn: 'root'
@@ -15,10 +16,10 @@ export class ApiService {
   constructor(private httpClient: HttpClient, ) { }
 
   getMovies(){
-    return  this.httpClient.get(this.baseUrl, {headers: this.headers});
+    return  this.httpClient.get<Movie[]>(this.baseUrl, {headers: this.headers});
   }
   getMovie(id:number){
-    return  this.httpClient.get(`${this.baseUrl}${id}/`, {headers: this.headers});
+    return  this.httpClient.get<Movie>(`${this.baseUrl}${id}/`, {headers: this.headers});
   }
   rateMovie(rate: number, movieId: number){
     const body = JSON.stringify({stars: rate});
