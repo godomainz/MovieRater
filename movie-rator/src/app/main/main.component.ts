@@ -10,6 +10,7 @@ import { Movie } from '../auth/models/Movie';
 export class MainComponent implements OnInit {
 
   movies:Movie[] = [];
+  editMovie:Movie;
   selectedMovie = null;
 
   constructor(private apiService:ApiService) { }
